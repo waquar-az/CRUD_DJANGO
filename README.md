@@ -1,4 +1,4 @@
-# CRUD_DJANGO
+#Student Management system {crud}
 This is CRUD application Based Python Django framework
 
 #
