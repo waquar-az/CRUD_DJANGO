@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+{% block title %}Home{% endblock title%}
+{% block main_content%}
+<section class='container'>
+  <div class='row justify-content-around text-center text-white mt-6'>
+    <div class='col-sm-8 '>
+       <h3>Student Management {CRUD} project in django </h3>
+    </div>
+  </div>
+
+  <div class='row justify-content-around  text-white mt-16'>
+    <div class='col-sm-8 '>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">roll</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Action</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for stud in studata %}
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{stud.name}}</td>
+                  <td>{{stud.roll}}</td>
+                  <td>{{stud.city}}</td>
+                  <td class="aline-inline">
+                        <table>
+                            <tr>
+                               <td>
+                                    <form action="{% url 'delete_student' %}" method="POST">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="id" value={{stud.id}}>
+                                      <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                                    </form>  
+                               </td>
+                                <td>
+                                        <a href="{% url 'edit_student' stud.id %}" class='btn btn-sm btn-info'>Edit</a>
+
+                                </td>
+
+                            </tr>  
+
+                        </table>
+                      
+                  </td>  
+                </tr>
+                {% endfor%}
+              </tbody>  
+        </table>
+    </div>
+  </div>
+
+  <div class='row justify-content-around'>
+     <div class='col-sm-8'>
+       <a href="{% url 'add-student' %}" class='btn btn-primary float-end'>Add</a>
+     </div>  
+  </div>
+</section>
+
+
+
+{% endblock main_content%}
